@@ -32,7 +32,7 @@ public class Main {
                 new Transaction(thomas, 890, 50, checkout_3, 2019)
         );
 
-        // get all transactionList by year
+        // get all transactions by year
         System.out.println(BasicTransactionsMethods.findAllByYearAndSort(transactionList, 2019));
 
         // get all unique supermarkets by name from transaction list
