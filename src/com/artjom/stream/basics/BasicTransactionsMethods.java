@@ -10,56 +10,99 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-// Static Methods for stream examples with Transacions Lists
+// Static Methods for stream examples with Transacions (package testdata.transactions) Lists
 public class BasicTransactionsMethods {
 
     static List<Transaction> findAllByYearAndSort(List<Transaction> transactionList, int year) {
         System.out.println("###### all transactionList for year and sort by sales value ######");
 
-        return transactionList.stream().filter(transaction -> transaction.getYear() == year).sorted(Comparator.comparing(Transaction::getSalesValue)).collect(Collectors.toList());
+        return transactionList
+                .stream()
+                .filter(transaction -> transaction.getYear() == year)
+                .sorted(Comparator.comparing(Transaction::getSalesValue))
+                .collect(Collectors.toList());
     }
 
     static List<Transaction> uniqCityNamesFromCustomers(List<Transaction> transactionList) {
         System.out.println("###### all transactionList by uniq City name ######");
 
-        return transactionList.stream().filter(distinctByKey(transaction -> transaction.getCustomer().getCity())).collect(Collectors.toList());
+        return transactionList
+                .stream()
+                .filter(distinctByKey(transaction -> transaction
+                        .getCustomer()
+                        .getCity()))
+                .collect(Collectors.toList());
     }
 
     static List<Transaction> allCustomersForGivenCity(List<Transaction> transactionList, String name) {
         System.out.println("###### all transactionList from given city ######");
 
-        return transactionList.stream().filter(transaction -> transaction.getCustomer().getCity().equals(name)).distinct().collect(Collectors.toList());
+        return transactionList
+                .stream()
+                .filter(transaction -> transaction
+                        .getCustomer()
+                        .getCity()
+                        .equals(name))
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     static String allCustomerNames(List<Transaction> transactionList) {
         System.out.println("###### all customer names ######");
 
-        return transactionList.stream().map(transaction -> transaction.getCustomer().getName()).sorted().distinct().collect(Collectors.joining(", "));
+        return transactionList
+                .stream()
+                .map(transaction -> transaction
+                        .getCustomer()
+                        .getName())
+                .sorted()
+                .distinct()
+                .collect(Collectors.joining(", "));
     }
 
     static boolean areAnyCustomersFromGivenCity(List<Transaction> transactionList, String city) {
         System.out.println("###### are any customer from given city name? (" + city + ") ######");
 
-        return transactionList.stream().anyMatch(transaction -> transaction.getCustomer().getCity().equals(city));
+        return transactionList
+                .stream()
+                .anyMatch(transaction -> transaction
+                        .getCustomer()
+                        .getCity()
+                        .equals(city));
     }
 
     static String printAllSalesValuesForGivenCity(List<Transaction> transactionList, String city) {
         System.out.println("###### all sales values for given City  (" + city + ")######");
 
-        return transactionList.stream().filter(transaction -> transaction.getCustomer().getCity().equals(city)).map(Transaction::getSalesValue).map(String::valueOf).collect(Collectors.joining(", "));
+        return transactionList
+                .stream()
+                .filter(transaction -> transaction
+                        .getCustomer()
+                        .getCity()
+                        .equals(city))
+                .map(Transaction::getSalesValue)
+                .map(String::valueOf)
+                .collect(Collectors.joining(", "));
     }
 
     static Integer highestValueOfAllTransactions(List<Transaction> transactionList) {
         System.out.println("###### Highest Sales Value from all Transactions ######");
 
-        return transactionList.stream().map(Transaction::getSalesValue).reduce(Integer::max).orElse(0);
+        return transactionList
+                .stream()
+                .map(Transaction::getSalesValue)
+                .reduce(Integer::max)
+                .orElse(0);
     }
 
     static Transaction theSmallestValue(List<Transaction> transactionList) {
         System.out.println("###### Smalest Transaction by value ######");
 
         // return transactions.stream().reduce(getSmallest()).orElse(null);
-        return transactionList.stream().min(Comparator.comparing(Transaction::getSalesValue)).orElse(null);
+        return transactionList
+                .stream()
+                .min(Comparator.comparing(Transaction::getSalesValue))
+                .orElse(null);
     }
 
     // distinct by Key for Stream.
