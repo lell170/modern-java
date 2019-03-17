@@ -1,4 +1,4 @@
-package com.artjom.testdata.transactions;
+package org.modernjava.testdata.transactions;
 
 public class Checkout {
 

@@ -1,4 +1,4 @@
-package com.artjom.testdata.transactions;
+package org.modernjava.testdata.transactions;
 
 public class Transaction {
 
@@ -7,13 +7,15 @@ public class Transaction {
     private int salesValue;
     private int spentTime;
     private int year;
+    private Currency currency;
 
-    public Transaction(Customer customer, int salesValue, int spentTime, Checkout checkout, int year) {
+    public Transaction(Customer customer, int salesValue, int spentTime, Checkout checkout, int year, Currency currency) {
         this.customer = customer;
         this.salesValue = salesValue;
         this.spentTime = spentTime;
         this.checkout = checkout;
         this.year = year;
+        this.currency = currency;
     }
 
     public Customer getCustomer() {
@@ -65,5 +67,13 @@ public class Transaction {
                 ",\n spentTime=" + spentTime +
                 ",\n year=" + year +
                 "}\n";
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 }

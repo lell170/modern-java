@@ -1,6 +1,6 @@
-package com.artjom.stream.basics;
+package org.modernjava.stream.basics;
 
-import com.artjom.testdata.transactions.Transaction;
+import org.modernjava.testdata.transactions.Transaction;
 
 import java.util.Comparator;
 import java.util.List;
@@ -10,11 +10,10 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-// Static Methods for stream examples with Transacions (package testdata.transactions) Lists
-public class BasicTransactionsMethods {
+// Static Methods for stream examples with Transactions (package testdata.transactions) Lists
+public class BasicStreamMethods {
 
     static List<Transaction> findAllByYearAndSort(List<Transaction> transactionList, int year) {
-        System.out.println("###### all transactionList for year and sort by sales value ######");
 
         return transactionList
                 .stream()
@@ -24,7 +23,6 @@ public class BasicTransactionsMethods {
     }
 
     static List<Transaction> getAllForUniqueCityNames(List<Transaction> transactionList) {
-        System.out.println("###### all transactionList by unique City name ######");
 
         return transactionList
                 .stream()
@@ -35,7 +33,6 @@ public class BasicTransactionsMethods {
     }
 
     static List<Transaction> allCustomersForGivenCity(List<Transaction> transactionList, String city) {
-        System.out.println("###### all transactionList from given city ######");
 
         return transactionList
                 .stream()
@@ -48,7 +45,6 @@ public class BasicTransactionsMethods {
     }
 
     static String allCustomerNames(List<Transaction> transactionList) {
-        System.out.println("###### all customer names ######");
 
         return transactionList
                 .stream()
@@ -61,7 +57,6 @@ public class BasicTransactionsMethods {
     }
 
     static boolean areAnyCustomersFromGivenCity(List<Transaction> transactionList, String city) {
-        System.out.println("###### are any customer from given city name? (" + city + ") ######");
 
         return transactionList
                 .stream()
@@ -72,7 +67,6 @@ public class BasicTransactionsMethods {
     }
 
     static String getAllSalesValuesForGivenCity(List<Transaction> transactionList, String city) {
-        System.out.println("###### all sales values for given City  (" + city + ")######");
 
         return transactionList
                 .stream()
@@ -86,8 +80,8 @@ public class BasicTransactionsMethods {
     }
 
     static Integer getHighestValue(List<Transaction> transactionList) {
-        System.out.println("###### Highest Sales Value from all Transactions ######");
-
+        // The problem with this code is that there are a lot of boxing operations. Behind the scenes
+        // each Integer needs to be unboxed to a primitive before performing the summation. Better solution IntStream.*
         return transactionList
                 .stream()
                 .map(Transaction::getSalesValue)
@@ -96,7 +90,6 @@ public class BasicTransactionsMethods {
     }
 
     static Transaction getTransactionWithSmalestValue(List<Transaction> transactionList) {
-        System.out.println("###### Smalest Transaction by value ######");
 
         // return transactions.stream().reduce(getSmallest()).orElse(null);
         return transactionList
