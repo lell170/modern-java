@@ -36,7 +36,7 @@ public class Main {
         System.out.println(BasicTransactionsMethods.findAllByYearAndSort(transactionList, 2019));
 
         // get all unique supermarkets by name from transaction list
-        System.out.println(BasicTransactionsMethods.uniqCityNamesFromCustomers(transactionList));
+        System.out.println(BasicTransactionsMethods.getAllForUniqueCityNames(transactionList));
 
         // get all customers from given City name
         System.out.println(BasicTransactionsMethods.allCustomersForGivenCity(transactionList, "Auckland"));
@@ -48,13 +48,13 @@ public class Main {
         System.out.println(BasicTransactionsMethods.areAnyCustomersFromGivenCity(transactionList, "Sidney"));
 
         // get all sales values for given City
-        System.out.println(BasicTransactionsMethods.printAllSalesValuesForGivenCity(transactionList, "Sidney"));
+        System.out.println(BasicTransactionsMethods.getAllSalesValuesForGivenCity(transactionList, "Sidney"));
 
         // get highest sales value of all Transactions
-        System.out.println(BasicTransactionsMethods.highestValueOfAllTransactions(transactionList));
+        System.out.println(BasicTransactionsMethods.getHighestValue(transactionList));
 
         // get Transaction highest sales value from all Transactions
-        System.out.println(BasicTransactionsMethods.theSmallestValue(transactionList));
+        System.out.println(BasicTransactionsMethods.getTransactionWithSmalestValue(transactionList));
 
     }
 

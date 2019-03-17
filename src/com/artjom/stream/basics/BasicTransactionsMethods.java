@@ -23,8 +23,8 @@ public class BasicTransactionsMethods {
                 .collect(Collectors.toList());
     }
 
-    static List<Transaction> uniqCityNamesFromCustomers(List<Transaction> transactionList) {
-        System.out.println("###### all transactionList by uniq City name ######");
+    static List<Transaction> getAllForUniqueCityNames(List<Transaction> transactionList) {
+        System.out.println("###### all transactionList by unique City name ######");
 
         return transactionList
                 .stream()
@@ -34,7 +34,7 @@ public class BasicTransactionsMethods {
                 .collect(Collectors.toList());
     }
 
-    static List<Transaction> allCustomersForGivenCity(List<Transaction> transactionList, String name) {
+    static List<Transaction> allCustomersForGivenCity(List<Transaction> transactionList, String city) {
         System.out.println("###### all transactionList from given city ######");
 
         return transactionList
@@ -42,7 +42,7 @@ public class BasicTransactionsMethods {
                 .filter(transaction -> transaction
                         .getCustomer()
                         .getCity()
-                        .equals(name))
+                        .equals(city))
                 .distinct()
                 .collect(Collectors.toList());
     }
@@ -71,7 +71,7 @@ public class BasicTransactionsMethods {
                         .equals(city));
     }
 
-    static String printAllSalesValuesForGivenCity(List<Transaction> transactionList, String city) {
+    static String getAllSalesValuesForGivenCity(List<Transaction> transactionList, String city) {
         System.out.println("###### all sales values for given City  (" + city + ")######");
 
         return transactionList
@@ -85,7 +85,7 @@ public class BasicTransactionsMethods {
                 .collect(Collectors.joining(", "));
     }
 
-    static Integer highestValueOfAllTransactions(List<Transaction> transactionList) {
+    static Integer getHighestValue(List<Transaction> transactionList) {
         System.out.println("###### Highest Sales Value from all Transactions ######");
 
         return transactionList
@@ -95,7 +95,7 @@ public class BasicTransactionsMethods {
                 .orElse(0);
     }
 
-    static Transaction theSmallestValue(List<Transaction> transactionList) {
+    static Transaction getTransactionWithSmalestValue(List<Transaction> transactionList) {
         System.out.println("###### Smalest Transaction by value ######");
 
         // return transactions.stream().reduce(getSmallest()).orElse(null);
