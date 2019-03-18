@@ -9,11 +9,6 @@ import static java.util.stream.Collectors.*;
 
 public class CollectorMethods {
 
-    static Map<Currency, List<Transaction>> getTransactionsByCurrencies(List<Transaction> transactionList) {
-        return transactionList.stream().
-                collect(groupingBy(Transaction::getCurrency));
-    }
-
     // this method is only for learning collect stream method. Not useless for production
     // could be useful by using with other collectors
     static Long getCountOfAllTransactions(List<Transaction> transactionList) {
@@ -53,5 +48,21 @@ public class CollectorMethods {
                 collect(reducing((d1, d2) -> d1.getSalesValue() > d2.getSalesValue() ? d1 : d2)).get();
     }
 
+    // grouping by example
+    static Map<Currency, Optional<Transaction>> getMapHighestValueByCurrencyOptional(List<Transaction> transactionList) {
+        return transactionList.stream().
+                collect(groupingBy(Transaction::getCurrency, maxBy(Comparator.comparingInt(Transaction::getSalesValue))));
+    }
+
+    // same example without optional
+    static Map<Currency, Transaction> getMapHighestValueByCurrency(List<Transaction> transactionList) {
+        return transactionList.stream().
+                collect(groupingBy(Transaction::getCurrency, collectingAndThen(maxBy(Comparator.comparingInt(Transaction::getSalesValue)), Optional::get)));
+    }
+
+    static Map<Currency, List<Transaction>> getTransactionsByCurrencies(List<Transaction> transactionList) {
+        return transactionList.stream().
+                collect(groupingBy(Transaction::getCurrency));
+    }
 
 }
