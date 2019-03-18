@@ -7,6 +7,7 @@ import java.util.*;
 
 import static java.util.stream.Collectors.*;
 
+@SuppressWarnings({"SimplifyStreamApiCallChains", "SimplifyCollector"})
 public class CollectorMethods {
 
     // this method is only for learning collect stream method. Not useless for production
@@ -54,8 +55,11 @@ public class CollectorMethods {
                 collect(groupingBy(Transaction::getCurrency, maxBy(Comparator.comparingInt(Transaction::getSalesValue))));
     }
 
-    // same example without optional
+    // same example without optional. can be replaced Collectors.toMap...
     static Map<Currency, Transaction> getMapHighestValueByCurrency(List<Transaction> transactionList) {
+        // return transactionList.stream().
+        //        collect(Collectors.toMap(Transaction::getCurrency, Function.identity(), BinaryOperator.maxBy(Comparator.comparingInt(Transaction::getSalesValue))));
+
         return transactionList.stream().
                 collect(groupingBy(Transaction::getCurrency, collectingAndThen(maxBy(Comparator.comparingInt(Transaction::getSalesValue)), Optional::get)));
     }
