@@ -8,8 +8,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        TestDataGenerator testDataGenerator = new TestDataGenerator();
-        List<Transaction> transactionList = testDataGenerator.generateAndGetTransactionList();
+        List<Transaction> transactionList = TestDataGenerator.getTestTransactionsData();
 
         // get sum of all sales Values for Transaction
         System.out.println(NumericStreamMethods.getSumOfAllSalesValues(transactionList));

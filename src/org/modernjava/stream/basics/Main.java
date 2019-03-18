@@ -9,8 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        TestDataGenerator testDataGenerator = new TestDataGenerator();
-        List<Transaction> transactionList = testDataGenerator.generateAndGetTransactionList();
+        List<Transaction> transactionList = TestDataGenerator.getTestTransactionsData();
 
         // get all transactions by year
         System.out.println(BasicStreamMethods.findAllByYearAndSort(transactionList, 2019));

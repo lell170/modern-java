@@ -8,10 +8,14 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        TestDataGenerator testDataGenerator = new TestDataGenerator();
-        List<Transaction> transactionList = testDataGenerator.generateAndGetTransactionList();
+        List<Transaction> transactionList = TestDataGenerator.getTestTransactionsData();
 
         System.out.println(CollectorMethods.getTransactionsByCurrencies(transactionList));
+        System.out.println(CollectorMethods.getCountOfAllTransactions(transactionList));
+        System.out.println(CollectorMethods.getSumOfAllTransactionValues(transactionList));
+        System.out.println(CollectorMethods.getTransactionWithHighestValue(transactionList));
+        System.out.println(CollectorMethods.getTransactionStatistics(transactionList));
+        System.out.println(CollectorMethods.getTransactionWithHighestValueByReducing(transactionList));
     }
 
 }
