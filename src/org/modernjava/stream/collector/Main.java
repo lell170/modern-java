@@ -18,6 +18,8 @@ public class Main {
         System.out.println(CollectorMethods.getTransactionWithHighestValueByReducing(transactionList));
         System.out.println(CollectorMethods.getMapHighestValueByCurrencyOptional(transactionList));
         System.out.println(CollectorMethods.getMapHighestValueByCurrency(transactionList));
+        System.out.println(CollectorMethods.getNamesOfAllCustomers(transactionList));
+        System.out.println(CollectorMethods.produceExceptionByWrongUseOfCollect(transactionList));
     }
 
 }
