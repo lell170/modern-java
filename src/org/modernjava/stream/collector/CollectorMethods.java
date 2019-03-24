@@ -3,21 +3,15 @@ package org.modernjava.stream.collector;
 import org.modernjava.testdata.transactions.Currency;
 import org.modernjava.testdata.transactions.Transaction;
 
-import java.util.Comparator;
-import java.util.IntSummaryStatistics;
-import java.util.List;
-import java.util.Optional;
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
 import static java.util.stream.Collectors.*;
 
 // @SuppressWarnings({"SimplifyStreamApiCallChains", "SimplifyCollector"})
 public class CollectorMethods {
 
-    // this method is only for learning collect stream method. Not always useless for production
-    // could be useful by using with other collectors
+    // not always useless for production
+    // could be useful by using with other collectors?
     static Long getCountOfAllTransactions(List<Transaction> transactionList) {
         return transactionList
                 .stream()
@@ -49,11 +43,11 @@ public class CollectorMethods {
                 .collect(summarizingInt(Transaction::getSalesValue));
     }
 
-    // use reducing method from Collectors. Return value is Optional
-    // in same cases is better to use reducing instead of reduce Method of stream
-    // collect is mutable reduction. Is better for parallel processing?
-    // collect() can only work with mutable result objects.
+    // in same cases is better to use reducing instead of reduce() method of stream
+    // collect uses mutable container for reduction. for example ArrayList is mutable
     // reduce() is designed to work with immutable result objects. collect is useless if objects are mutable
+    // collect is better for parallel processing
+    // by simple reducing operations can be replaced with reduce method of Stream API
     static Transaction getTransactionWithHighestValueByReducing(List<Transaction> transactionList) {
         return transactionList
                 .stream()
@@ -82,34 +76,4 @@ public class CollectorMethods {
                 .collect(groupingBy(Transaction::getCurrency));
     }
 
-    // custom Collector implementation. Instead of method reference use lambda for understanding purpose
-
-    // () -> new ArrayList<>() -> Supplier. Initializing of Container. Can be replaced by method reference
-    // (list, item) -> list.add(item) -> Accumulator
-    // (list, items) -> list.addAll(items) Combiner. Is useful for parallel processing.
-    // The combiner function must fold the elements from the second result container into the first result container.
-
-    // its all can be replaced by method refernce: collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
-
-    // List is mutable Container. Can be used again to append new elements.
-    // stream.reduce() creates new objects on each step of reduction
-    static List<String> getNamesOfAllCustomers(List<Transaction> transactionList) {
-        return transactionList
-                .stream().map(transaction -> transaction.getCustomer().getName())
-                .collect(() -> new ArrayList<>(), (list, item) -> list.add(item), (list, items) -> list.addAll(items));
-    }
-
-    // throws UnsupportedOperationException because immutable Data Structure is given.
-    // Unmodifiable List implements List but all mutable operations throws Exception.
-    static List<String> produceExceptionByWrongUseOfCollect(List<Transaction> transactionList) {
-        List<String> emptyList = Collections.emptyList();
-        try {
-            return transactionList
-                    .stream().map(transaction -> transaction.getCustomer().getName())
-                    .collect(() -> Collections.unmodifiableList(emptyList), List::add, List::addAll);
-        } catch (UnsupportedOperationException e) {
-            System.out.println("cant process it. Immutable data structure is given");
-            return emptyList;
-        }
-    }
 }

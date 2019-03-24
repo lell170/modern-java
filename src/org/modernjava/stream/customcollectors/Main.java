@@ -10,8 +10,10 @@ public class Main {
     public static void main(String[] args) {
         List<Transaction> transactionList = TestDataGenerator.getTestTransactionsData();
 
-        System.out.println(CustomcollectorMethods.getNamesOfAllCitiesCollectorOf(transactionList));
-        System.out.println(CustomcollectorMethods.getNamesOfAllCitiesWithCustomCollector(transactionList));
+        System.out.println(CustomCollectorMethods.getNamesOfAllCitiesCollectorOf(transactionList));
+        System.out.println(CustomCollectorMethods.getNamesOfAllCitiesWithCustomCollector(transactionList));
+        System.out.println(CustomCollectorMethods.getNamesOfAllCustomers(transactionList));
+        System.out.println(CustomCollectorMethods.produceExceptionByWrongUseOfCollect(transactionList));
     }
 
 }
