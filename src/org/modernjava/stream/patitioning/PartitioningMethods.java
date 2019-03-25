@@ -14,12 +14,11 @@ public class PartitioningMethods {
 	public static Map<Boolean, List<Integer>> partitionCompositeNumbers(int n) {
 		return IntStream.rangeClosed(2, n)
 				.boxed()
-				.parallel()
 				.collect(Collectors.partitioningBy(PartitioningMethods::isComposite));
 	}
 
 	// partitioning with collector
-	public static Map<Boolean, List<Integer>> partitioningCompositesWithCollector(int n) {
+	public static Map<Boolean, List<Integer>> partitioningCompositeWithCollector(int n) {
 		return IntStream.rangeClosed(2, n)
 				.boxed()
 				.collect(new CompositeNumbersCollector());
