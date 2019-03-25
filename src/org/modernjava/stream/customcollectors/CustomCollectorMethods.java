@@ -58,8 +58,8 @@ public class CustomCollectorMethods {
     // Custom collector class suggestion
     public static List<String> getNamesOfAllCitiesWithCustomCollector(List<Transaction> transactionList) {
         return transactionList
-                .stream().
-                        map(transaction -> transaction.getCustomer().getCity())
+                .stream()
+                .map(transaction -> transaction.getCustomer().getCity())
                 .distinct()
                 .collect(new ToListCollector<>());
     }
@@ -89,12 +89,6 @@ public class CustomCollectorMethods {
             return Collections.unmodifiableSet(EnumSet.of(IDENTITY_FINISH, CONCURRENT));
         }
     }
-
-    // custom Collector implementation. Instead of method reference is used lambda for learning purpose
-
-    // Supplier. Initializing of container: () -> new ArrayList<>()
-    // Accumulator: (list, item) -> list.add(item)
-    // Combiner: (list, items) -> list.addAll(items)
 
     // List is mutable Container. Can be used again to append new elements.
     // stream.reduce() creates new objects on each step of reduction
