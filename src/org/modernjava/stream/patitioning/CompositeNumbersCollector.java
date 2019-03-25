@@ -22,10 +22,10 @@ public class CompositeNumbersCollector implements Collector<Integer, Map<Boolean
 	public Supplier<Map<Boolean, List<Integer>>> supplier() {
 		// can be replaced by anonymous class
 		return () -> {
-			HashMap<Boolean, List<Integer>> booleanListHashMap = new HashMap<>();
-			booleanListHashMap.put(true, new ArrayList<>());
-			booleanListHashMap.put(false, new ArrayList<>());
-			return booleanListHashMap;
+			HashMap<Boolean, List<Integer>> compositeAndPrimeMap = new HashMap<>();
+			compositeAndPrimeMap.put(true, new ArrayList<>());
+			compositeAndPrimeMap.put(false, new ArrayList<>());
+			return compositeAndPrimeMap;
 		};
 	}
 
