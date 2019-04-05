@@ -2,10 +2,12 @@ package org.modernjava.stream.basics;
 
 import org.modernjava.testdata.transactions.Transaction;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -104,5 +106,20 @@ public class BasicStreamMethods {
         Map<Object, Boolean> map = new ConcurrentHashMap<>();
 
         return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
+    }
+
+    // ÖBB Train Number Check
+    static void generateCheckSumFromTrainNumber(String number) {
+        //TODO: implement next part
+        List<Integer> listBeforeLine = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+        // Atomic integer for incrementing functions... not the best solution
+        AtomicInteger atomicInteger = new AtomicInteger();
+        int checkSum = listBeforeLine.stream().mapToInt(Integer::intValue).map(raw -> raw * ((1 + atomicInteger.getAndIncrement()) % 2 + 1)).map(multiplied -> {
+            if (multiplied >= 10) {
+                return (multiplied / 10) + (multiplied % 10);
+            } else {
+                return multiplied;
+            }
+        }).sum();
     }
 }
