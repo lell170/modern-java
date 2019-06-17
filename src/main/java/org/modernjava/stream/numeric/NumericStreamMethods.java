@@ -25,4 +25,6 @@ public class NumericStreamMethods {
                      .parallel()
                      .reduce(0L, Long::sum);
     }
+
+
 }
