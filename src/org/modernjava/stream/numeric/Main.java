@@ -4,6 +4,7 @@ import org.modernjava.testdata.transactions.TestDataGenerator;
 import org.modernjava.testdata.transactions.Transaction;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Main {
 
@@ -15,5 +16,10 @@ public class Main {
 
         // get max sales value for all Transaction
         System.out.println(NumericStreamMethods.getMaxSalesValueForTransactions(transactionList));
+
+        // get sum of all digits for given n
+        System.out.println(NumericStreamMethods.getSum(9999));
+
+        Stream.iterate(1, integer -> integer+2).reduce(Integer::sum);
     }
 }
