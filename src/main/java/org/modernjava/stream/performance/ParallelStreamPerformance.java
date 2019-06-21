@@ -3,8 +3,14 @@ package org.modernjava.stream.performance;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
+import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.TearDown;
+import org.openjdk.jmh.annotations.Warmup;
 
 import java.util.concurrent.TimeUnit;
 import java.util.stream.LongStream;
@@ -13,6 +19,9 @@ import java.util.stream.Stream;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Fork(value = 2, jvmArgs = {"-Xms4G", "-Xmx4G"})
+@Measurement(iterations = 2)
+@Warmup(iterations = 2)
+@State(value = Scope.Benchmark)
 public class ParallelStreamPerformance {
 
 	private static final long N = 10_000_000L;
@@ -44,11 +53,9 @@ public class ParallelStreamPerformance {
 				.reduce(0L, Long::sum);
 	}
 
-
-/*
 	@TearDown(Level.Invocation)
 	public void tearDown() {
 		System.gc();
 	}
-*/
+
 }
