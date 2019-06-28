@@ -27,12 +27,12 @@ public class ParallelStreamPerformance {
 	private static final long N = 10_000_000L;
 
 	@Benchmark
-	public long sequentialSum() {
+	public long normalStreamMethod() {
 		return Stream.iterate(1L, i -> i + 1).limit(N).reduce(0L, Long::sum);
 	}
 
 	@Benchmark
-	public long iterativeSum() {
+	public long forLoopMethod() {
 		long result = 0;
 		for (long i = 1L; i <= N; i++) {
 			result += i;
@@ -41,13 +41,14 @@ public class ParallelStreamPerformance {
 	}
 
 	@Benchmark
-	public long rangedSum() {
+	public long numericStreamRange() {
 		return LongStream.rangeClosed(1, N)
 				.reduce(0L, Long::sum);
 	}
 
+	// numeric parallel stream is faster than all another methods to calculate sum of digits.
 	@Benchmark
-	public long parallelRangedSum() {
+	public long parallelNumericStreamRange() {
 		return LongStream.rangeClosed(1, N)
 				.parallel()
 				.reduce(0L, Long::sum);
