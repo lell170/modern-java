@@ -9,7 +9,7 @@ public class Transaction {
     private int year;
     private Currency currency;
 
-    public Transaction(Customer customer, int salesValue, int spentTime, Checkout checkout, int year, Currency currency) {
+    public Transaction(final Customer customer, final int salesValue, final int spentTime, final Checkout checkout, final int year, final Currency currency) {
         this.customer = customer;
         this.salesValue = salesValue;
         this.spentTime = spentTime;
@@ -22,7 +22,7 @@ public class Transaction {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(final Customer customer) {
         this.customer = customer;
     }
 
@@ -30,7 +30,7 @@ public class Transaction {
         return salesValue;
     }
 
-    public void setSalesValue(int salesValue) {
+    public void setSalesValue(final int salesValue) {
         this.salesValue = salesValue;
     }
 
@@ -38,7 +38,7 @@ public class Transaction {
         return spentTime;
     }
 
-    public void setSpentTime(int spentTime) {
+    public void setSpentTime(final int spentTime) {
         this.spentTime = spentTime;
     }
 
@@ -46,7 +46,7 @@ public class Transaction {
         return checkout;
     }
 
-    public void setCheckout(Checkout checkout) {
+    public void setCheckout(final Checkout checkout) {
         this.checkout = checkout;
     }
 
@@ -54,7 +54,7 @@ public class Transaction {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(final int year) {
         this.year = year;
     }
 
@@ -73,7 +73,7 @@ public class Transaction {
         return currency;
     }
 
-    public void setCurrency(Currency currency) {
+    public void setCurrency(final Currency currency) {
         this.currency = currency;
     }
 }

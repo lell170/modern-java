@@ -7,13 +7,13 @@ class WordCounter {
 	private final int counter;
 	private final boolean lastSpace;
 
-	public WordCounter(int counter, boolean lastSpace) {
+	public WordCounter(final int counter, final boolean lastSpace) {
 		this.counter = counter;
 		this.lastSpace = lastSpace;
 	}
 
 	// return new object word counter with current counter value
-	public WordCounter accumulate(Character c) {
+	public WordCounter accumulate(final Character c) {
 		if (Character.isWhitespace(c)) {
 			return lastSpace ? this : new WordCounter(counter, true);
 		} else {
@@ -21,7 +21,7 @@ class WordCounter {
 		}
 	}
 
-	public WordCounter combine(WordCounter wordCounter) {
+	public WordCounter combine(final WordCounter wordCounter) {
 		return new WordCounter(counter + wordCounter.counter, wordCounter.lastSpace);
 	}
 

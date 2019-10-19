@@ -6,10 +6,10 @@ import modernjava.testdata.transactions.Transaction;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class Main {
+class Main {
 
-    public static void main(String[] args) {
-        List<Transaction> transactionList = TestDataGenerator.getTestTransactionsData();
+    public static void main(final String[] args) {
+        final List<Transaction> transactionList = TestDataGenerator.getTestTransactionsData();
 
         // get sum of all sales Values for Transaction
         System.out.println(NumericStreamMethods.getSumOfAllSalesValues(transactionList));

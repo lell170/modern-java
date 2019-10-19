@@ -5,7 +5,7 @@ public class Customer {
     private String name;
     private String city;
 
-    public Customer(String name, String city) {
+    public Customer(final String name, final String city) {
         this.name = name;
         this.city = city;
     }
@@ -14,7 +14,7 @@ public class Customer {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -22,7 +22,7 @@ public class Customer {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(final String city) {
         this.city = city;
     }
 

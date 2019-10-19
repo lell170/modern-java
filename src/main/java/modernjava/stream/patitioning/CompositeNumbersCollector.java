@@ -15,13 +15,13 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
-public class CompositeNumbersCollector implements Collector<Integer, Map<Boolean, List<Integer>>, Map<Boolean, List<Integer>>> {
+class CompositeNumbersCollector implements Collector<Integer, Map<Boolean, List<Integer>>, Map<Boolean, List<Integer>>> {
 
     @Override
     public Supplier<Map<Boolean, List<Integer>>> supplier() {
         // can be replaced by anonymous class
         return () -> {
-            HashMap<Boolean, List<Integer>> compositeAndPrimeMap = new HashMap<>();
+            final HashMap<Boolean, List<Integer>> compositeAndPrimeMap = new HashMap<>();
             compositeAndPrimeMap.put(true, new ArrayList<>());
             compositeAndPrimeMap.put(false, new ArrayList<>());
             return compositeAndPrimeMap;

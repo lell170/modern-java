@@ -5,14 +5,14 @@ import modernjava.testdata.transactions.Transaction;
 
 import java.util.List;
 
-public class Main {
+class Main {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 
-        List<Transaction> transactionList = TestDataGenerator.getTestTransactionsData();
+        final List<Transaction> transactionList = TestDataGenerator.getTestTransactionsData();
 
         // get all transactions by year
-        System.out.println(BasicStreamMethods.findAllByYearAndSort(transactionList, 2019));
+        System.out.println(BasicStreamMethods.findAllByYearAndSort(transactionList));
 
         // get all unique supermarkets by name from transaction list
         System.out.println(BasicStreamMethods.getAllForUniqueCityNames(transactionList));

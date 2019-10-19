@@ -22,13 +22,13 @@ import java.util.stream.LongStream;
 @Measurement(iterations = 2)
 @Warmup(iterations = 2)
 @State(value = Scope.Benchmark)
-public class NotGoodExample {
+class NotGoodExample {
 
 	private static final long N = 10_000_000L;
 
 	@Benchmark
 	public long sideEffectSum() {
-		Accumulator accumulator = new Accumulator();
+		final Accumulator accumulator = new Accumulator();
 		LongStream.rangeClosed(1, N).forEach(accumulator::add);
 		System.out.println("sideEffectSum " + accumulator.total);
 		return accumulator.total;
@@ -37,7 +37,7 @@ public class NotGoodExample {
 	@Benchmark
 	// this will return incorrect results!
 	public long sideEffectParallelSum() {
-		Accumulator accumulator = new Accumulator();
+		final Accumulator accumulator = new Accumulator();
 		LongStream.rangeClosed(1, N).parallel().forEach(accumulator::add);
 		System.out.println("sideEffectParallelSum with reduce" + accumulator.total);
 		return accumulator.total;
@@ -46,8 +46,8 @@ public class NotGoodExample {
 	@Benchmark
 	// this will return correct results cause of collector
 	public long sideEffectParallelSumWithCollect() {
-		Accumulator accumulator = LongStream.rangeClosed(1, N).parallel().boxed()
-				.collect(Collector.of(Accumulator::new, Accumulator::add, (acc1, acc2) -> {
+		final Accumulator accumulator = LongStream.rangeClosed(1, N).parallel().boxed()
+                                                  .collect(Collector.of(Accumulator::new, Accumulator::add, (acc1, acc2) -> {
 					acc1.add(acc2.total);
 					return acc1;
 				}, t->t, CONCURRENT));
@@ -58,8 +58,8 @@ public class NotGoodExample {
 	@Benchmark
 	// this will return correct results cause of collector
 	public long sideEffectSingleStreamWithCollect() {
-		Accumulator accumulator = LongStream.rangeClosed(1, N).boxed()
-				.collect(Collector.of(Accumulator::new, Accumulator::add, (acc1, acc2) -> {
+		final Accumulator accumulator = LongStream.rangeClosed(1, N).boxed()
+                                                  .collect(Collector.of(Accumulator::new, Accumulator::add, (acc1, acc2) -> {
 					acc1.add(acc2.total);
 					return acc1;
 				}, t->t, CONCURRENT));
@@ -68,15 +68,15 @@ public class NotGoodExample {
 	}
 
 
-	public class Accumulator {
+	class Accumulator {
 
-		public long total = 0;
+		long total = 0;
 
-		public void add(long value) {
+		void add(final long value) {
 			total += value;
 		}
 
-		public void combine(Accumulator accumulator1, Accumulator accumulator2) {
+		public void combine(final Accumulator accumulator1, final Accumulator accumulator2) {
 			this.add(accumulator1.total + accumulator2.total);
 		}
 	}

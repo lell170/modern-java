@@ -17,13 +17,13 @@ public class SpliteratorMethods {
 					" früh das Frühstück brachte, kam diesmal nicht.";
 
 	public SpliteratorMethods() {
-		StringBuilder stringBuilder = new StringBuilder();
-		try (BufferedReader br = new BufferedReader(new FileReader("text.txt"))) {
+		final StringBuilder stringBuilder = new StringBuilder();
+		try (final BufferedReader br = new BufferedReader(new FileReader("text.txt"))) {
 			while ((br.readLine()) != null) {
 				stringBuilder.append(br.readLine());
 			}
 			testString = stringBuilder.toString();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -32,7 +32,7 @@ public class SpliteratorMethods {
 	public int countWordsIteratively() {
 		int counter = 0;
 		boolean lastSpace = true;
-		for (char c : this.testString.toCharArray()) {
+		for (final char c : this.testString.toCharArray()) {
 			if (Character.isWhitespace(c)) {
 				lastSpace = true;
 			} else {
@@ -45,16 +45,16 @@ public class SpliteratorMethods {
 		return counter;
 	}
 
-	public int calculateWordsFromStream(Stream<Character> stream) {
-		WordCounter wordCounter =
+	public int calculateWordsFromStream(final Stream<Character> stream) {
+		final WordCounter wordCounter =
 				stream.reduce(new WordCounter(0, true), WordCounter::accumulate, WordCounter::combine);
 		return wordCounter.getCounter();
 	}
 
 
 	public int streamMethod() {
-		Stream<Character> stream = IntStream.range(0, this.testString.length())
-				.mapToObj(this.testString::charAt);
+		final Stream<Character> stream = IntStream.range(0, this.testString.length())
+												  .mapToObj(this.testString::charAt);
 
 		return calculateWordsFromStream(stream);
 	}
@@ -62,15 +62,15 @@ public class SpliteratorMethods {
 	// this method split string arbitrary. This method will return false result!
 	// solution is to make sure that the string is separated only after each word by parallel processing!
 	public int wrongParallelStreamMethod() {
-		Stream<Character> stream = IntStream.range(0, this.testString.length())
-				.mapToObj(this.testString::charAt).parallel();
+		final Stream<Character> stream = IntStream.range(0, this.testString.length())
+												  .mapToObj(this.testString::charAt).parallel();
 
 		return calculateWordsFromStream(stream);
 	}
 
 	public int correctParallelStreamMethod() {
-		Spliterator<Character> spliterator = new WordCounterSpliterator(this.testString);
-		Stream<Character> stream = StreamSupport.stream(spliterator, true);
+		final Spliterator<Character> spliterator = new WordCounterSpliterator(this.testString);
+		final Stream<Character> stream = StreamSupport.stream(spliterator, true);
 
 		return calculateWordsFromStream(stream);
 

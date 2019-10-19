@@ -1,8 +1,8 @@
 package modernjava.stream.patitioning;
 
-public class Main {
+class Main {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         System.out.println(PartitioningMethods.partitioningCompositeWithCollector(9999));
         System.out.println(PartitioningMethods.partitionCompositeNumbers(9999));
     }

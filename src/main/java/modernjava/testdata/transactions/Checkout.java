@@ -4,7 +4,7 @@ public class Checkout {
 
     private int id;
 
-    public Checkout(int id) {
+    public Checkout(final int id) {
         this.id = id;
     }
 
@@ -12,7 +12,7 @@ public class Checkout {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(final int id) {
         this.id = id;
     }
 

@@ -11,11 +11,11 @@ import java.util.stream.Collector;
 
 import static java.util.stream.Collector.Characteristics.*;
 
-public class CustomCollectorMethods {
+class CustomCollectorMethods {
 
     // Collector.of() suggestion
     // (it all can be replaced with lambda or method reference)
-    static List<String> getNamesOfAllCitiesCollectorOf(List<Transaction> transactionList) {
+    static List<String> getNamesOfAllCitiesCollectorOf(final List<Transaction> transactionList) {
         return transactionList
                 .stream()
                 .map(transaction -> transaction.getCustomer().getCity()).distinct()
@@ -30,14 +30,14 @@ public class CustomCollectorMethods {
                         // Accumulator: BiConsumer process operation with two given arguments of type T and U
                         new BiConsumer<List<String>, String>() {
                             @Override
-                            public void accept(List<String> list, String item) {
+                            public void accept(final List<String> list, final String item) {
                                 list.add(item);
                             }
                         },
                         // Combiner: BinaryOperator obtains two parameter same Type and returns the same Type as given <T,T,T>
                         new BinaryOperator<List<String>>() {
                             @Override
-                            public List<String> apply(List<String> list1, List<String> list2) {
+                            public List<String> apply(final List<String> list1, final List<String> list2) {
                                 list1.addAll(list2);
                                 return list1;
                             }
@@ -56,7 +56,7 @@ public class CustomCollectorMethods {
     }
 
     // Custom collector class suggestion
-    public static List<String> getNamesOfAllCitiesWithCustomCollector(List<Transaction> transactionList) {
+    static List<String> getNamesOfAllCitiesWithCustomCollector(final List<Transaction> transactionList) {
         return transactionList
                 .stream()
                 .map(transaction -> transaction.getCustomer().getCity())
@@ -92,7 +92,7 @@ public class CustomCollectorMethods {
 
     // List is mutable Container. Can be used again to append new elements.
     // stream.reduce() creates new objects on each step of reduction
-    static List<String> getNamesOfAllCustomers(List<Transaction> transactionList) {
+    static List<String> getNamesOfAllCustomers(final List<Transaction> transactionList) {
         return transactionList
                 .stream().map(transaction -> transaction.getCustomer().getName())
                 .collect(() -> new ArrayList<>(), (list, item) -> list.add(item), (list, items) -> list.addAll(items));
@@ -100,13 +100,13 @@ public class CustomCollectorMethods {
 
     // throws UnsupportedOperationException because immutable Data Structure is given.
     // Unmodifiable List implements List but all mutable operations throws Exception.
-    static List<String> produceExceptionByWrongUseOfCollect(List<Transaction> transactionList) {
-        List<String> emptyList = Collections.emptyList();
+    static List<String> produceExceptionByWrongUseOfCollect(final List<Transaction> transactionList) {
+        final List<String> emptyList = Collections.emptyList();
         try {
             return transactionList
                     .stream().map(transaction -> transaction.getCustomer().getName())
                     .collect(() -> Collections.unmodifiableList(emptyList), List::add, List::addAll);
-        } catch (UnsupportedOperationException e) {
+        } catch (final UnsupportedOperationException e) {
             System.out.println("cant process it. Immutable data structure is given");
             return emptyList;
         }

@@ -6,20 +6,20 @@ import java.util.List;
 import java.util.OptionalInt;
 import java.util.stream.Stream;
 
-public class NumericStreamMethods {
+class NumericStreamMethods {
 
     // get sum of all sales values
-    static int getSumOfAllSalesValues(List<Transaction> transactionList) {
+    static int getSumOfAllSalesValues(final List<Transaction> transactionList) {
         return transactionList.stream().mapToInt(Transaction::getSalesValue).sum();
     }
 
     // get max sales value for transaction
-    static OptionalInt getMaxSalesValueForTransactions(List<Transaction> transactionList) {
+    static OptionalInt getMaxSalesValueForTransactions(final List<Transaction> transactionList) {
         return transactionList.stream().mapToInt(Transaction::getSalesValue).max();
     }
 
     // parallel stream
-    static long getSum(long n) {
+    static long getSum(final long n) {
         return Stream.iterate(1L, i -> i + 1)
                      .limit(n)
                      .parallel()

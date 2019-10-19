@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 @Fork(value = 2, jvmArgs = {"-Xms4G", "-Xmx4G"})
 @Measurement(iterations = 5)
 @State(value = Scope.Benchmark)
-public class WordCounterPerformance {
+class WordCounterPerformance {
 
 	private SpliteratorMethods spliteratorMethods;
 

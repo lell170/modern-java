@@ -1,9 +1,9 @@
 package modernjava.stream.spliterator;
 
-public class Main {
+class Main {
 
-	public static void main(String[] args) {
-		SpliteratorMethods spliteratorMethods = new SpliteratorMethods();
+	public static void main(final String[] args) {
+		final SpliteratorMethods spliteratorMethods = new SpliteratorMethods();
 
 		System.out.println(spliteratorMethods.streamMethod());
 		System.out.println(spliteratorMethods.wrongParallelStreamMethod());

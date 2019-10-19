@@ -22,7 +22,7 @@ import java.util.stream.Stream;
 @Measurement(iterations = 2)
 @Warmup(iterations = 2)
 @State(value = Scope.Benchmark)
-public class ParallelStreamPerformance {
+class ParallelStreamPerformance {
 
 	private static final long N = 10_000_000L;
 
